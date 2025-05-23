@@ -1,0 +1,251 @@
+
+:root {
+  --list-item-color: #B9B39F;
+  --viewer-bg-color: #8f8974;
+  --list-item-hover-color: #908a75;
+  --file-searcher-bg-color: #D7D0B9;
+  --text-color: rgb(46, 34, 42);
+  --dark-green: #37352D;
+  --text-color-semi: rgba(46, 34, 42, 0.78);
+  --icon-video: url("icons/material-symbols-light--animated-images-outline-sharp.svg");
+
+}
+
+body {
+  scroll-behavior: smooth;
+  background-color: var(--file-searcher-bg-color);
+  color: var(--text-color);
+  font-family: monospace;
+  display: flex;
+  flex-direction: row;
+  overflow:hidden;
+}
+
+#file-searcher {
+  margin-right: 10px;
+  width: 45%;
+  background-color: var(--file-searcher-bg-color);
+  
+}
+
+.list-icon {
+  filter:invert(21%); 
+}
+
+
+
+#item-list {
+  scrollbar-color: var(--text-color) rgba(255,255,255,0);
+  margin: 0px;
+  height: 40rem;
+  overflow-y: scroll;
+  padding: 0px 0px 0px 0px;
+}
+
+#item-list > li {
+  user-select: none;
+  font-weight: 700;
+  font-size: 100%;
+  padding: 0px 0px 0px 0px;
+  margin-bottom: 3px;
+  position: relative;
+  display: flex;
+  height: max-content;
+  align-items: center;
+  vertical-align: middle;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: margin-left 0.1s, background-position 0.2s; 
+  background-image: linear-gradient(to right, var(--text-color) 50%, var(--list-item-color) 50%);
+}
+
+
+
+
+
+
+
+
+#item-list > li:hover {
+  margin-left: 25px;
+  background-position: 0 -100%;
+  color: var(--file-searcher-bg-color);
+  animation: blink 1s infinite alternate;
+  animation-delay: 0.5s;
+  cursor: pointer;
+}
+
+#item-list > li:hover::before {
+  position: absolute;
+  content: '';
+  background-image: url(icons/material-symbols-light--arrow-menu-open-rounded.svg);
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  width: 24px;
+  margin: auto;
+  height: 100%;
+  left: -25px;
+}
+
+hr {
+  border: 1px solid var(--text-color);
+  opacity: 80%;
+}
+
+#border-line-2 {
+  border-style: dashed;
+  margin-bottom: 0px;
+}
+
+
+
+#search-title {
+  text-shadow: 4px 2px rgba(46, 34, 42, 0.2);
+  margin: 1rem 0px;
+  padding-left: 0.5rem;
+  font-weight: 400;
+  font-size: 200%;
+}
+
+#search-title::after {
+  content: '_';
+  width: 100px;
+  height: 100px;
+  animation: text_blink 0.5s infinite step-start;
+}
+
+@keyframes text_blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@keyframes blink {
+  0% {
+    background-image: none;
+    background-color: var(--text-color);
+  }
+  100% {
+    background-image: none;
+    background-color: var(--text-color-semi);
+  }
+}
+
+
+
+
+#item-list > li:hover .list-icon {
+  filter: invert(100%);
+  transition: filter 0.05s;
+}
+
+
+
+
+#file-viewer {
+  display: inline-block;
+  background-color: var(--list-item-color);
+  width: 55%;
+  margin: 0.5rem;
+
+}
+
+#texture {
+  pointer-events: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  /*background-color: var(--dark-green);*/
+
+  background-image: radial-gradient(rgba(64,58,44,0.17) 15%, transparent 16%), 
+                    radial-gradient(rgba(64,58,44,0.17) 15%, transparent 16%);
+  background-size: 3px 3px;
+  background-position: 0 0, 6px 6px;
+}
+
+#file-viewer-title {
+  padding: 10px;
+  color: var(--file-searcher-bg-color);
+  font-weight: 400;
+  margin: 0;
+  background-color: var(--dark-green);
+    background-image: radial-gradient(rgba(255,255,255,0.1) 15%, transparent 16%), 
+                    radial-gradient(rgba(255,255,255,0.1) 15%, transparent 16%);
+  background-size: 10px 10px;
+  background-position: 0 0, 20px 20px;
+}
+
+#file-viewer > hr {
+  margin: 5px 20px;
+  border-color: var(--list-item-hover-color);
+}
+
+#file-preview {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  margin: 10px 20px;
+  padding: 10px;
+  background-color: rgba(46, 34, 42, 0.4);
+  width: auto;
+  height: 20rem;
+
+}
+
+.preview-not-available {
+  background-color: #37352D;
+  width: 100%;
+  height: 100%;
+  color: var(--file-searcher-bg-color);
+  font-size: 300%;
+  font-weight: 200;
+  display: flex;
+  vertical-align: middle;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#text-descriptions {
+  margin-left: 1.5rem;
+}
+
+#text-descriptions > .text-description-item {
+  text-align:justify;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#preview-box {
+  margin: auto;
+  border: none;
+  max-height: 90%;
+  opacity: 0;
+  scale: 100%;
+  animation: appear 0.15s forwards;
+  animation-iteration-count: 1;
+  border-radius: 0px;
+  border-style: solid;
+  border-color: var(--text-color);
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0%;
+    scale: 95%;
+  }
+  100% {
+    scale: 100%;
+    opacity: 100%;
+    border-width: 2px;
+  }
+}
